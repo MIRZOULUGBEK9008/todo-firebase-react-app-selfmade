@@ -14,6 +14,7 @@ import RootLayouts from "./layouts/RootLayouts";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const [loader, setLoader] = useState(false);
@@ -35,6 +36,10 @@ function App() {
     {
       path: "/signup",
       element: <Signup />,
+    },
+    {
+      path: "*",
+      element: <NotFound />,
     },
   ]);
   return (
