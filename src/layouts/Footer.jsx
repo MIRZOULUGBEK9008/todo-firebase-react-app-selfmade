@@ -3,7 +3,8 @@ function Footer() {
     <footer className="footer footer-center bg-base-300 text-base-content p-4">
       <aside>
         <p>
-          Copyright © 2023 - All right reserved by Mirzo Ulugbek Khudoyberdiyev
+          Copyright © {new Date().getFullYear()} - All right reserved by Mirzo
+          Ulugbek Khudoyberdiyev
         </p>
       </aside>
     </footer>
