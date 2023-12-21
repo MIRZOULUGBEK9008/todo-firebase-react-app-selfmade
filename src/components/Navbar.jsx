@@ -1,10 +1,10 @@
-import { toast } from "react-toastify";
 import ThemeController from "./ThemeController";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
     <div className="navbar bg-base-100">
-      <div className="navbar-start">
+      <div className="navbar-start w-[40%]">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
             <svg
@@ -27,19 +27,19 @@ function Navbar() {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             <li>
-              <a>Homepage</a>
+              <Link to={"/"}>Homepage</Link>
             </li>
             <li>
-              <a>Portfolio</a>
+              <Link to={"/signup"}>Signup</Link>
             </li>
             <li>
-              <a>About</a>
+              <Link to={"/login"}>Login</Link>
             </li>
           </ul>
         </div>
       </div>
       <div className="navbar-center">
-        <a className="btn btn-ghost text-xl">Todo app</a>
+        <a className="btn btn-ghost text-xl">Welcome to Palonchi</a>
       </div>
       <ThemeController />
     </div>

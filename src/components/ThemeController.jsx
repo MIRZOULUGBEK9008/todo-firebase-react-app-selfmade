@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect } from "react";
 
 function ThemeController() {
   const themes = [
@@ -35,14 +35,14 @@ function ThemeController() {
     "nord",
     "sunset",
   ];
+
+  function handleChange({ target: { value } }) {
+    localStorage.setItem("theme", value);
+  }
+
   return (
     <div className="dropdown ml-auto">
-      <label
-        htmlFor="themeController"
-        tabIndex={0}
-        role="button"
-        className="btn m-1"
-      >
+      <label tabIndex={0} role="button" className="btn m-1">
         Theme
         <svg
           width="12px"
@@ -54,15 +54,15 @@ function ThemeController() {
           <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path>
         </svg>
       </label>
-      <input className="peer sr-only" id="themeController" type="checkbox" />
       <ul
         tabIndex={0}
-        className="bg-base-300 rounded-box invisible absolute right-0 z-[1] h-[200px] w-52 overflow-y-scroll p-2 shadow-2xl transition peer-checked:visible"
+        className="bg-base-300 rounded-box dropdown-content absolute right-0 z-[1] h-[200px] w-52 overflow-y-scroll p-2 shadow-2xl transition"
       >
         {themes.map((theme, index) => {
           return (
             <li key={index}>
               <input
+                onChange={(e) => handleChange(e)}
                 type="radio"
                 name="theme-dropdown"
                 className="theme-controller btn btn-sm btn-block btn-ghost justify-start"

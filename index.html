@@ -10,6 +10,13 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo app with Firebase, TailwindCSS, DaisyUI</title>
+
+    <script>
+      window.onload = function () {
+        document.documentElement.dataset.theme =
+          localStorage.getItem("theme") || "autumn";
+      };
+    </script>
   </head>
   <body class="h-full">
     <div class="flex h-full flex-col" id="root"></div>
