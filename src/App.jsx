@@ -1,8 +1,12 @@
 // React hooks
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 // RRD hooks
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  Navigate,
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
 
 // Conponents
 import Loader from "./components/Loader";
@@ -15,27 +19,29 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NotFound from "./pages/NotFound";
+import { ProtectedRoutes } from "./components/ProtectedRoutes";
+import { GlobalContext } from "./context/GlobalContext";
 
 function App() {
   const [loader, setLoader] = useState(false);
+  const { user } = useContext(GlobalContext);
   const routes = createBrowserRouter([
     {
       path: "/",
-      element: <RootLayouts />,
-      elements: [
-        {
-          index: true,
-          element: <Home />,
-        },
-      ],
+      element: (
+        <ProtectedRoutes user={user}>
+          <RootLayouts />
+        </ProtectedRoutes>
+      ),
+      children: [{ index: true, element: <Home /> }],
     },
     {
       path: "/login",
-      element: <Login />,
+      element: user ? <Navigate to={"/"} /> : <Login />,
     },
     {
       path: "/signup",
-      element: <Signup />,
+      element: user ? <Navigate to={"/"} /> : <Signup />,
     },
     {
       path: "*",
@@ -49,5 +55,7 @@ function App() {
     </>
   );
 }
+
+// routes
 
 export default App;
