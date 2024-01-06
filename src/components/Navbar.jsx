@@ -1,7 +1,22 @@
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase/firebase.config";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 import ThemeController from "./ThemeController";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Navbar() {
+  const { user, dispatch } = useGlobalContext();
+
+  const logout = () => {
+    signOut(auth)
+      .then(() => toast.success("Signout succesfully :)"))
+      .catch(({ message }) => {
+        console.error(message);
+        toast.error(message);
+      });
+  };
+
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start w-[40%]">
@@ -35,11 +50,14 @@ function Navbar() {
             <li>
               <Link to={"/login"}>Login</Link>
             </li>
+            <li>
+              <button onClick={logout}>Logout</button>
+            </li>
           </ul>
         </div>
       </div>
       <div className="navbar-center">
-        <a className="btn btn-ghost text-xl">Welcome to Palonchi</a>
+        <a className="btn btn-ghost text-xl">Welcome to {user.displayName}</a>
       </div>
       <ThemeController />
     </div>

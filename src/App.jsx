@@ -1,5 +1,5 @@
 // React hooks
-import { useContext, useState } from "react";
+import { useEffect, useState } from "react";
 
 // RRD hooks
 import {
@@ -20,11 +20,15 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NotFound from "./pages/NotFound";
 import { ProtectedRoutes } from "./components/ProtectedRoutes";
-import { GlobalContext } from "./context/GlobalContext";
+import { useGlobalContext } from "./hooks/useGlobalContext";
+
+// Firebase
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase/firebase.config";
 
 function App() {
   const [loader, setLoader] = useState(false);
-  const { user } = useContext(GlobalContext);
+  const { user, isAuthReady, dispatch } = useGlobalContext();
   const routes = createBrowserRouter([
     {
       path: "/",
@@ -48,10 +52,18 @@ function App() {
       element: <NotFound />,
     },
   ]);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      dispatch({ type: "LOGIN", payload: user });
+      dispatch({ type: "IS_AUTH_READY" });
+    });
+  }, []);
+
   return (
     <>
       {loader && <Loader />}
-      <RouterProvider router={routes} />
+      {isAuthReady && <RouterProvider router={routes} />}
     </>
   );
 }
