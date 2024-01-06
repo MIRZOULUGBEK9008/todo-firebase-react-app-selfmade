@@ -50,17 +50,32 @@ function Navbar() {
             <li>
               <Link to={"/login"}>Login</Link>
             </li>
+          </ul>
+        </div>
+      </div>
+      <ThemeController />
+      <div className="navbar-end">
+        <a className="btn btn-ghost text-xl">Welcome to {user.displayName}</a>
+        <div className="dropdown dropdown-end ml-2">
+          <div
+            tabIndex={0}
+            role="button"
+            className="avatar btn btn-circle btn-ghost"
+          >
+            <div className="w-10 rounded-full">
+              <img alt="User photo" src={user?.photoURL} />
+            </div>
+          </div>
+          <ul
+            tabIndex={0}
+            className="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow"
+          >
             <li>
               <button onClick={logout}>Logout</button>
             </li>
           </ul>
         </div>
       </div>
-      <div className="navbar-center">
-        <a className="btn btn-ghost text-xl">Welcome to {user.displayName}</a>
-        <img src={user?.photoURL} alt="" />
-      </div>
-      <ThemeController />
     </div>
   );
 }
