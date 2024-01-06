@@ -58,6 +58,7 @@ function Navbar() {
       </div>
       <div className="navbar-center">
         <a className="btn btn-ghost text-xl">Welcome to {user.displayName}</a>
+        <img src={user?.photoURL} alt="" />
       </div>
       <ThemeController />
     </div>

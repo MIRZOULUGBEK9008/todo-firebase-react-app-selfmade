@@ -29,6 +29,7 @@ import { auth } from "./firebase/firebase.config";
 function App() {
   const [loader, setLoader] = useState(false);
   const { user, isAuthReady, dispatch } = useGlobalContext();
+  console.log(user);
   const routes = createBrowserRouter([
     {
       path: "/",
