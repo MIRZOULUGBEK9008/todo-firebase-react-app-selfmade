@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 function Navbar() {
-  const { user, dispatch } = useGlobalContext();
+  const { user } = useGlobalContext();
 
   const logout = () => {
     signOut(auth)

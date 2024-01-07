@@ -1,11 +1,27 @@
 import { Link } from "react-router-dom";
+import { useSignup } from "../hooks/useSignup";
+import { useLogin } from "../hooks/useLogin";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 
 function Login() {
+  const { isPending } = useGlobalContext();
+  const { signUpWithGoogleProvider } = useSignup();
+  const { login } = useLogin();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = new FormData(e.target);
+    const obj = {};
+    for (const [key, value] of data.entries()) {
+      obj[key] = value;
+    }
+    login(obj);
+  };
+
   return (
     <div className="flex h-full items-center justify-center bg-base-200">
       <div className="w-full max-w-[400px]">
         <h2 className="mb-4 text-center text-2xl font-bold">Login</h2>
-        <form className="flex flex-col gap-5">
+        <form onSubmit={(e) => handleSubmit(e)} className="flex flex-col gap-5">
           <label>
             <span className="label-text font-semibold">Email</span>
             <input
@@ -27,7 +43,24 @@ function Login() {
               required
             />
           </label>
-          <button className="btn btn-neutral btn-active">Submit</button>
+          <button
+            className={`btn btn-neutral btn-active ${
+              isPending ? "pointer-events-none" : "pointer-events-auto"
+            }`}
+          >
+            {isPending ? (
+              <span className="loading loading-spinner loading-md"></span>
+            ) : (
+              "Submit"
+            )}
+          </button>
+          <button
+            onClick={signUpWithGoogleProvider}
+            className="btn btn-ghost btn-active"
+            type="button"
+          >
+            Google
+          </button>
           <Link className="btn btn-accent btn-active" to={"/signup"}>
             Create an account
           </Link>
