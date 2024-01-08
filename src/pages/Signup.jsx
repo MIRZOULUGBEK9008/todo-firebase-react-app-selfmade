@@ -38,6 +38,16 @@ function Signup() {
             />
           </label>
           <label>
+            <span className="label-text font-semibold">Photo URL</span>
+            <input
+              type="url"
+              placeholder="Enter your photo URL"
+              name="photoURL"
+              className="input input-bordered input-info w-full"
+              required
+            />
+          </label>
+          <label>
             <span className="label-text font-semibold">Username</span>
             <input
               type="text"

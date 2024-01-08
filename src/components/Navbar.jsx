@@ -45,10 +45,7 @@ function Navbar() {
               <Link to={"/"}>Homepage</Link>
             </li>
             <li>
-              <Link to={"/signup"}>Signup</Link>
-            </li>
-            <li>
-              <Link to={"/login"}>Login</Link>
+              <Link to={"/create"}>Create</Link>
             </li>
           </ul>
         </div>
@@ -63,7 +60,7 @@ function Navbar() {
             className="avatar btn btn-circle btn-ghost"
           >
             <div className="w-10 rounded-full">
-              <img alt="User photo" src={user?.photoURL} />
+              <img alt="User photo" src={user.photoURL} />
             </div>
           </div>
           <ul

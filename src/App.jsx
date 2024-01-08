@@ -25,6 +25,7 @@ import { useGlobalContext } from "./hooks/useGlobalContext";
 // Firebase
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/firebase.config";
+import Create from "./pages/Create";
 
 function App() {
   const [loader, setLoader] = useState(false);
@@ -38,7 +39,10 @@ function App() {
           <RootLayouts />
         </ProtectedRoutes>
       ),
-      children: [{ index: true, element: <Home /> }],
+      children: [
+        { index: true, element: <Home /> },
+        { path: "/create", element: <Create /> },
+      ],
     },
     {
       path: "/login",
